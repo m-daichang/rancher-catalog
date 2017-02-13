@@ -5,7 +5,7 @@ catalog:
   description: "initialize"
   questions:
   - variable: nginx_port
-    description: "Public listening port for MySQL"
+    description: "Public listening port"
     label: "Public Port"
     required: true
     default: "80"
@@ -16,6 +16,15 @@ catalog:
     required: false
     default: "test"
     type: "string"
+  - variable: test_text
+    description: "Test TEXT"
+    label: "テストテキスト"
+    required: false
+    default: |
+      test test
+      test test
+      test test
+    type: "multiline"
   - variable: test_password
     description: "Test Password"
     label: "テストパスワード"
@@ -37,20 +46,17 @@ catalog:
     options:
     - production
     - develop
-  - variable: test_text
-    description: "Test TEXT"
-    label: "テストテキスト"
-    required: false
-    default: |
-      test test
-      test test
-      test test
-    type: "multiline"
   - variable: test_service
     description: "Service"
     label: "サービスを選択してください"
     required: false
     type: "service"
+  - variable: test_int
+    description: "Test int"
+    label: "Test int"
+    required: false
+    default: "100"
+    type: "int"
 services:
   lb:
     lb_config:
