@@ -1,6 +1,8 @@
 version: '2'
 services:
   lb:
+    labels:
+      io.rancher.scheduler.global: 'true'
     ports:
     - ${nginx_port}
     tty: true
