@@ -4,24 +4,53 @@ catalog:
   version : "v0.1"
   description: "initialize"
   questions:
-    - variable: nginx_port
-      description: "Public listening port for MySQL"
-      label: "Public Port"
-      required: true
-      default: "80"
-      type: "int"
-    - variable: test_string
-      description: "Test String"
-      label: "テスト文字列"
-      required: false
-      default: "test"
-      type: "string"
-    - variable: test_password
-      description: "Test Password"
-      label: "テストパスワード"
-      required: false
-      default: "password"
-      type: "password"
+  - variable: nginx_port
+    description: "Public listening port for MySQL"
+    label: "Public Port"
+    required: true
+    default: "80"
+    type: "int"
+  - variable: test_string
+    description: "Test String"
+    label: "テスト文字列"
+    required: false
+    default: "test"
+    type: "string"
+  - variable: test_password
+    description: "Test Password"
+    label: "テストパスワード"
+    required: false
+    default: "password"
+    type: "password"
+  - variable: test_boolean
+    description: "Test boolean"
+    label: "テストboolean"
+    required: true
+    default: "false"
+    type: "boolean"
+  - variable: identifier
+    description: "Selected identifier (production/develop)"
+    label: "作成する環境を選択してください。（production/develop）"
+    required: true
+    default: "develop"
+    type: "enum"
+    options:
+    - production
+    - develop
+  - variable: test_text
+    description: "Test TEXT"
+    label: "テストテキスト"
+    required: false
+    default: |
+      test test
+      test test
+      test test
+    type: "multiline"
+  - variable: test_service
+    description: "Service"
+    label: "サービスを選択してください"
+    required: false
+    type: "service"
 services:
   lb:
     lb_config:
