@@ -1,0 +1,40 @@
+version: '2'
+catalog:
+  name : "Nginx"
+  version : "v0.1"
+  description: "initialize"
+  questions:
+    - variable: nginx_port
+      description: "Public listening port for MySQL"
+      label: "Public Port"
+      required: true
+      default: "80"
+      type: "int"
+    - variable: test_string
+      description: "Test String"
+      label: "テスト文字列"
+      required: false
+      default: "test"
+      type: "string"
+    - variable: test_password
+      description: "Test Password"
+      label: "テストパスワード"
+      required: false
+      default: "password"
+      type: "password"
+services:
+  lb:
+    lb_config:
+      port_rules:
+      - source_port: ${nginx_port}
+        target_port: 80
+        protocol: tcp
+        service: nginx
+    health_check:
+      port: 42
+      interval: 2000
+      unhealthy_threshold: 3
+      healthy_threshold: 2
+      response_timeout: 2000
+  nginx:
+    scale: 1

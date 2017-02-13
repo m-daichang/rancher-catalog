@@ -1,0 +1,16 @@
+version: '2'
+services:
+  lb:
+    ports:
+    - ${nginx_port}
+    tty: true
+    image: rancher/lb-service-haproxy:v0.5.9
+    links:
+    - nginx:nginx
+    stdin_open: true
+  nginx:
+    labels:
+      io.rancher.container.hostname_override: container_name
+    tty: true
+    image: nginx:1.10
+    stdin_open: true
