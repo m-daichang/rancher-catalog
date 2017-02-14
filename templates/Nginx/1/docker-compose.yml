@@ -3,6 +3,8 @@ services:
   nginx:
     labels:
       io.rancher.container.hostname_override: container_name
+    ports:
+    - ${nginx_port}:80
     tty: true
     image: nginx:1.10
     stdin_open: true
