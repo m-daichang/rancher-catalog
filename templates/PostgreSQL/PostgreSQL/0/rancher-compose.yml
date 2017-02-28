@@ -1,0 +1,47 @@
+version: '2'
+catalog:
+  name : "PostgreSQL"
+  version : "v0.5"
+  description: "Evolve用 PostgreSQL"
+  questions:
+    - variable: postgres_port
+      description: "Public listening port for PostgreSQL"
+      label: "PostgreSQL用 Public Port"
+      required: true
+      default: "5432"
+      type: "int"
+    - variable: database_name
+      description: "Database Name"
+      label: "DB名"
+      required: false
+      default: "postgres"
+      type: "string"
+    - variable: database_user
+      description: "Database User Name"
+      label: "DBユーザ名"
+      required: false
+      default: "postgres"
+      type: "string"
+    - variable: database_password
+      description: "Database Password"
+      label: "DBパスワード"
+      required: false
+      default: "postgres"
+      type: "password"
+services:
+  postgres-lb:
+    scale: 1
+    lb_config:
+      port_rules:
+      - source_port: ${postgres_port}
+        target_port: 5432
+        protocol: tcp
+        service: postgres
+    health_check:
+      port: 42
+      interval: 2000
+      unhealthy_threshold: 3
+      healthy_threshold: 2
+      response_timeout: 2000
+  postgres:
+    scale: 1
