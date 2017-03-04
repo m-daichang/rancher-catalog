@@ -1,0 +1,19 @@
+version: '2'
+services:
+  postgres-lb:
+    labels:
+      io.rancher.scheduler.global: 'true'
+    ports:
+    - ${postgres_port}:${postgres_port}
+    tty: true
+    image: rancher/lb-service-haproxy:v0.4.9
+    stdin_open: true
+  postgres:
+    labels:
+      io.rancher.container.hostname_override: container_name
+    tty: true
+    image: postgres:9.4
+    environment:
+      POSTGRES_DB: ${database_name}
+      POSTGRES_USER: ${database_user}
+      POSTGRES_PASSWORD: ${database_password}
