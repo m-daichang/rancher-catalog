@@ -1,8 +1,8 @@
 version: '2'
 catalog:
   name : "PostgreSQL"
-  version : "v0.5"
-  description: "Evolve用 PostgreSQL"
+  version : "v0.1"
+  description: "initialize"
   questions:
     - variable: postgres_port
       description: "Public listening port for PostgreSQL"
