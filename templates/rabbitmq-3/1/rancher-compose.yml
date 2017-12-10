@@ -1,0 +1,65 @@
+version: '2'
+catalog:
+  name: "Rabbit MQ"
+  version: "0.2.1"
+  decription: A reliable, distributed messaging broker
+  questions:
+    - variable: "rabbitmq_default_user"
+      description: "RabbitMQ connect user name"
+      label: "Default user name:"
+      required: false
+      type: "string"
+      default: guest
+    - variable: "rabbitmq_default_pass"
+      description: "RabbitMQ connect password"
+      label: "Default password:"
+      required: false
+      type: "password"
+      default: guest
+    - variable: "rabbitmq_default_vhost"
+      description: "RabbitMQ default vhost"
+      label: "Default vhost:"
+      required: false
+      type: "string"
+      default: /
+    - variable: "rabbitmq_scale"
+      description: "RabbitMQ scale number"
+      label: "scale:"
+      required: false
+      type: "int"
+      default: 3
+    - variable: "erlang_cookie"
+      description: "Erlang cookie required for auth"
+      label: "Erlang cookie:"
+      required: true
+      default: defaultcookiepleasechange
+      type: "string"
+    - variable: "cluster_partition_handling"
+      label: "Partition Handling:"
+      description: "Cluster partition handling mode"
+      required: true
+      type: "enum"
+      default: pause_minority
+      options:
+        - autoheal
+        - ignore
+        - pause_minority
+    - variable: "net_ticktime"
+      description: "Rabbitmq net ticktime setting"
+      label: "Net ticktime:"
+      required: false
+      type: "int"
+      default: 10
+    - variable: "confd_args"
+      description: "Confd additional args"
+      label: "Confd args"
+      required: false
+      type: "string"
+      default: --interval 5
+services:
+  rabbitmq:
+    scale: ${rabbitmq_scale}
+    metadata:
+      rabbitmq:
+        config:
+          node.name: "$${HOSTNAME}"
