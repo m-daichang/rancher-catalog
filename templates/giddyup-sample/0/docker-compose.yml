@@ -1,0 +1,6 @@
+version: '2'
+services:
+  giddyup-sample:
+    image: mdaichang/giddyup-sample:latest
+    labels:
+      io.rancher.container.hostname_override: container_name
