@@ -5,5 +5,5 @@ catalog:
   decription: This is a sample catalog for rancher/giddyup test
 services:
   giddyup-sample:
-    scale: 1
+    scale: 3
     start_on_create: true
